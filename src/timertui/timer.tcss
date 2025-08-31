@@ -1,0 +1,53 @@
+Timer {
+    layout: vertical;
+    min-width: 50;
+    min-height: 15;
+    background: $boost;
+    margin: 1;
+    padding: 1;
+}
+
+#inputs {
+    layout: vertical;
+    height: 10;
+    dock: top;
+}
+
+#controls {
+    layout: horizontal;
+    height: 3;
+}
+
+TimeDisplay {
+    text-align: center;
+    text-opacity: 60%;
+}
+
+#time_input {
+    text-align: center;
+}
+
+#name_input {
+    text-align: center;
+}
+
+#start {
+    dock: left;
+}
+
+#stop {
+    dock: left;
+    display: none;
+}
+
+.started #start {
+    display: none;
+}
+
+.started #stop {
+    display: block;
+}
+
+#reset {
+    dock: right;
+}
