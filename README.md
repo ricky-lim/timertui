@@ -45,7 +45,7 @@ https://github.com/user-attachments/assets/ed19e408-b7e3-4a1c-9206-9d97c250969c
 Run the timer TUI:
 
 ```sh
-timer
+timertui
 ```
 
 ### Keyboard Shortcuts
