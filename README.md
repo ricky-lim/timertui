@@ -1,12 +1,74 @@
-# Timer TUI
+# TimerTUI
 
-This is a demo of using textual to create timers
+A beautiful terminal timer app built with [Textual](https://www.textualize.io/). Supports multiple independent timers, each with its own sound.
 
-## How to run
+## Features
+
+- Add, remove, and run multiple timers in parallel
+- Each timer has its own independent beep (plays `beep.wav` on finish)
+- Modern TUI interface with dark/light mode toggle
+- Keyboard shortcuts for developer ergonomics
+
+## Run 
+
+```
+uvx run 'git+https://github.com/ricky-lim/timertui.git'
+```
+
+## Installation
+
+1. **Clone the repository:**
+	```sh
+	git clone https://github.com/ricky-lim/timertui.git
+	cd timertui
+	```
+2. **Create and activate a Python 3.13+ virtual environment:**
+	```sh
+    uv venv --python 3.13 --seed
+	source .venv/bin/activate
+	```
+3. **Install dependencies:**
+	```sh
+    uv sync
+    # Install for development
+	pip install -e .
+	```
+
+## Usage
+
+Run the timer TUI:
 
 ```sh
-textual run timer.py
-
-# Development mode
-textual run --dev timer.py
+timer
 ```
+
+### Keyboard Shortcuts
+
+- `Ctrl+A` — Add a new timer
+- `Ctrl+R` — Remove the last timer
+- `Ctrl+D` — Toggle dark/light mode
+- `Ctrl+Q` — Quit the app
+
+### Timer Controls
+
+- Set a name and duration (in seconds) for each timer
+- Start, stop, and reset timers independently
+- Each timer will play its own `beep.wav` sound continuously until you reset
+
+## Sound Requirements
+
+- The app uses `beep.wav` (in `src/timertui/`) for timer sounds
+- On macOS, the app uses the system `afplay` for playback (no PyAudio needed)
+- On other platforms, [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) is required
+
+## Development
+
+To run in development mode with hot reload:
+
+```sh
+textual run --dev src/timertui/main.py
+```
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
