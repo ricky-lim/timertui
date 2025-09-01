@@ -12,8 +12,10 @@ A beautiful terminal timer app built with [Textual](https://www.textualize.io/).
 ## Run 
 
 ```
-uvx run 'git+https://github.com/ricky-lim/timertui.git'
+uvx 'git+https://github.com/ricky-lim/timertui.git'
 ```
+
+[Watch demo](timertui.mov)
 
 ## Installation
 
