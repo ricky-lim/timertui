@@ -5,7 +5,6 @@ description = "A beautiful terminal timer app"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "pyaudio>=0.2.14",
     "textual>=6.0.0",
 ]
 
