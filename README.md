@@ -11,14 +11,14 @@ A beautiful terminal timer app built with [Textual](https://www.textualize.io/).
 
 ## Run 
 
+For WSL, `pulseaudio` is needed for the beeping sound. 
+You can install with: `sudo apt install pulseaudio`
+
 ```
 uvx 'git+https://github.com/ricky-lim/timertui.git'
 ```
 
-
-
 https://github.com/user-attachments/assets/ed19e408-b7e3-4a1c-9206-9d97c250969c
-
 
 
 ## Installation
