@@ -3,12 +3,6 @@ import sys
 import shutil
 import subprocess
 from pathlib import Path
-import wave
-
-try:
-    import pyaudio
-except ImportError:
-    pyaudio = None
 
 
 class Beeper:
@@ -39,29 +33,27 @@ class Beeper:
 
 
 def _play_wav(path: Path):
-    """Play a WAV file, preferring macOS afplay, then PyAudio, then terminal bell."""
+    """Play a WAV file, preferring macOS afplay, WSL paplay, then PyAudio, then terminal bell."""
+    path_str = str(path)
+    
+    # macOS: Use afplay
     if sys.platform.startswith("darwin") and shutil.which("afplay"):
-        subprocess.run(["afplay", str(path)], check=False)
+        subprocess.run(["afplay", path_str], check=False)
         return
 
-    if pyaudio:
-        wf = wave.open(path, "rb")
-        player = pyaudio.PyAudio()
-        try:
-            stream = player.open(
-                format=player.get_format_from_width(wf.getsampwidth()),
-                channels=wf.getnchannels(),
-                rate=wf.getframerate(),
-                output=True,
-            )
-            for chunk in iter(lambda: wf.readframes(1024), b""):
-                stream.write(chunk)
-            stream.stop_stream()
-            stream.close()
-        finally:
-            wf.close()
-            player.terminate()
+    # WSL: Use paplay (PulseAudio)
+    if _is_wsl() and shutil.which("paplay"):
+        subprocess.run(["paplay", path_str], check=False, stderr=subprocess.DEVNULL)
         return
 
     # Fallback: terminal bell
     print("\a", end="", flush=True)
+
+def _is_wsl():
+    """Check if running in Windows Subsystem for Linux."""
+    try:
+        with open('/proc/version', 'r') as f:
+            return 'microsoft' in f.read().lower() or 'wsl' in f.read().lower()
+    except (FileNotFoundError, PermissionError):
+        return False
+
